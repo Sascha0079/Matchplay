@@ -45,7 +45,6 @@ with tab1:
 
     if st.button("Berechne Course Handicaps (FA-01.05 & FA-01.06)", key="calc_allg_ch"):
         # FA-04.04: Grundlegende Validierung (st.number_input macht schon viel)
-        # Hier könnten noch spezifischere Bereichschecks hinzugefügt werden, falls die Min/Max-Werte des number_input nicht ausreichen
         
         # FA-01.05: 18-Loch
         course_handicap_18 = urs_round(hcpi_allg * (slope_allg / 113) + (cr_allg - par_allg))
@@ -127,8 +126,6 @@ with tab3:
         team_ch_t2 = urs_round(team_hcpi_t2 * (slope_vierer / 113) + (cr_vierer - par_vierer))
         st.write(f"Team Course Handicap Team 2 (FA-03.11): **{team_ch_t2}**")
 
-        # Vorgabeschläge (FA-03.12)
-        # Da team_ch_t1 und team_ch_t2 bereits gerundet sind, ist urs_round(abs(...)) hier formal korrekt.
         vorgabeschlaege_vierer = urs_round(abs(team_ch_t1 - team_ch_t2))
         st.success(f"Zu gewährende Vorgabeschläge (FA-03.12): **{vorgabeschlaege_vierer}**")
 

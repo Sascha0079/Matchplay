@@ -14,10 +14,15 @@
   <script>
     stlite.mount(
       {
-        requirements: [], // Keine externen Python-Pakete nötig für diese App
-        entrypoint: "streamlit_app.py", // Ihre Haupt-Python-Datei
-        // `files` ist nicht zwingend nötig, wenn streamlit_app.py im selben Verzeichnis liegt und vom Server ausgeliefert wird.
-        // stlite versucht, die entrypoint-Datei per Fetch zu laden.
+        entrypoint: "streamlit_app.py", // Sagt stlite, welche Datei gestartet werden soll
+        files: {
+          // Dieser Eintrag stellt sicher, dass der Inhalt von streamlit_app.py
+          // korrekt in das virtuelle Dateisystem von Pyodide geladen wird.
+          "streamlit_app.py": {
+            url: "./streamlit_app.py" // Pfad zur Datei, relativ zur index.html
+          }
+        },
+        requirements: [], // Keine externen Python-Pakete für diese App nötig
       },
       document.getElementById("root")
     );
