@@ -11,18 +11,20 @@
 <body>
   <div id="root"></div>
   <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.41.0/build/stlite.js"></script>
-  <script>
+  <script> // In Ihrer index.html
     stlite.mount(
       {
-        entrypoint: "streamlit_app.py", // Sagt stlite, welche Datei gestartet werden soll
+        entrypoint: "streamlit_app.py",
         files: {
-          // Dieser Eintrag stellt sicher, dass der Inhalt von streamlit_app.py
-          // korrekt in das virtuelle Dateisystem von Pyodide geladen wird.
           "streamlit_app.py": {
-            url: "./streamlit_app.py" // Pfad zur Datei, relativ zur index.html
+            url: "./streamlit_app.py"
+          },
+          // NEUER EINTRAG HIER:
+          "course_data.json": {
+            url: "./course_data.json"
           }
         },
-        requirements: [], // Keine externen Python-Pakete für diese App nötig
+        requirements: ["pandas"], // Pandas wird nützlich sein, um die Daten zu verarbeiten
       },
       document.getElementById("root")
     );
